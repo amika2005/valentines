@@ -4,6 +4,11 @@ body {
   font-family: courier;
   background-color: #fff5e4;
   color: #ff9494;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }
 #dessertquestion {
   font-size: 50px;
