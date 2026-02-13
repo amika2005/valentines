@@ -50,3 +50,35 @@ body {
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  body {
+    margin-top: 60px;
+  }
+  
+  #foodquestion {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .food-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%; 
+    margin: 5px;
+  }
+  
+  .food-item img {
+    height: 140px;
+    width: 140px;
+    border-width: 3px;
+  }
+  
+  .page-logo {
+    width: 60px;
+    top: 10px;
+    left: 10px;
+  }
+}

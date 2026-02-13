@@ -179,3 +179,44 @@ body {
 .control-btn:active {
   transform: scale(0.95);
 }
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  body {
+    padding-top: 60px;
+    background-size: auto; /* Allow background to scale but keep aspect ratio */
+  }
+
+  .couple-photo-container {
+    padding: 10px 10px 80px 10px; /* Adjust padding */
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .couple-photo {
+    max-width: 280px;
+    max-height: 350px;
+  }
+  
+  #thankyou {
+    font-size: 24px; /* Smaller font for mobile */
+    bottom: -2px;
+  }
+  
+  .page-logo {
+    width: 60px;
+    height: 60px;
+    top: 10px;
+    left: 10px;
+  }
+  
+  .music-controls {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .control-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

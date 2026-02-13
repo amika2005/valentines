@@ -426,3 +426,11 @@ body::before {
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
+@media (max-width: 600px) {
+  .page-logo {
+    width: 60px;
+    top: 10px;
+    left: 10px;
+  }
+}

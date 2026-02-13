@@ -94,3 +94,45 @@ img {
   transform: rotate(-15deg);
   pointer-events: none;
 }
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  body {
+    margin-top: 60px;
+  }
+  
+  #valentineQuestion {
+    font-size: 32px; /* Smaller text */
+    padding: 0 10px;
+  }
+  
+  img.responsive {
+    height: 300px; /* Reduce main image size */
+    width: auto;
+  }
+  
+  .answerButton {
+    padding: 8px 16px;
+    font-size: 16px;
+    display: block; /* Stack buttons */
+    margin: 10px auto;
+    width: 80%; /* Full width buttons */
+  }
+  
+  /* Adjust animated elements positions */
+  .animated-gif {
+    width: 60px;
+    top: 80px;
+  }
+  
+  .bubu-run {
+    width: 100px;
+    bottom: 10px;
+  }
+  
+  .decorative-flower {
+    width: 250px;
+    right: -30px;
+    bottom: -10px;
+  }
+}

@@ -51,3 +51,33 @@ body {
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  body {
+    margin-top: 60px;
+  }
+  
+  #dessertquestion {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .dessert-item {
+    display: inline-block;
+    width: 45%; 
+    margin: 5px;
+  }
+  
+  .dessert-item img {
+    height: 140px;
+    width: 140px;
+    border-width: 3px;
+  }
+  
+  .page-logo {
+    width: 60px;
+    top: 10px;
+    left: 10px;
+  }
+}
