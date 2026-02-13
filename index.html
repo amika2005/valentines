@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine</title>
+    <link rel="stylesheet" href="css/valentine.css" />
+  </head>
+  <body>
+    <img src="logo.jpg" alt="Logo" class="page-logo" />
+    <!-- Animated GIF moving from left to right -->
+    <img src="bubu-dudu-index.gif" class="animated-gif" alt="bubu dudu animation" />
+    
+    <!-- Bubu running animation -->
+    <img src="bubu run.gif" class="bubu-run" alt="bubu running" />
+    
+    <!-- Decorative flower -->
+    <img src="watercolor_flower.png" class="decorative-flower" alt="watercolor flower" />
+    
+    <div id="valentineQuestion"><b>Will you be my valentine?</b></div>
+    <button class="answerButton" onclick="location.href='thankyou.html'">
+      Yes babyyyy😘❤️
+    </button>
+    <button class="answerButton" id="noButton">no no no </button>
+    <br />
+    <img src="dudu-dudu-cute.gif" height="498px" width="150px" alt="cat asking question" class="responsive" />
+
+    <script>
+      const moveButton = () => {
+        var noButton = document.getElementById("noButton");
+        var x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+        var y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+
+        noButton.style.position = "absolute";
+        noButton.style.left = `${x}px`;
+        noButton.style.top = `${y}px`;
+      };
+
+      document
+        .getElementById("noButton")
+        .addEventListener("click", function () {
+          var yesButton = document.querySelector(
+            'button[onclick*="thankyou.html"]'
+          );
+          var currentFontSize = parseInt(
+            window.getComputedStyle(yesButton).fontSize
+          );
+          yesButton.style.fontSize = currentFontSize + 40 + "px"; // Increase font size
+        });
+
+      document
+        .getElementById("noButton")
+        .addEventListener("mouseover", moveButton);
+      
+      document
+        .getElementById("noButton")
+        .addEventListener("touchstart", moveButton);
+    </script>
+  </body>
+</html>

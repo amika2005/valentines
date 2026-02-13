@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank you</title>
+    <link rel="stylesheet" href="css/lastpage.css" />
+  </head>
+  <body>
+    <img src="logo.jpg" alt="Logo" class="page-logo" />
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div id="thankyou"><b>Thank you my Babygirlll😘</b></div>
+
+    <img height="300px" id="rizz" src="thanks.png" alt="rizzler god" class="responsive" />
+    
+    <h1>Don't go yet!</h1>
+    <button class="button" onclick="location.href='date.html'">
+      Click me heheehe... 
+    </button>
+    
+    <!-- Positioned GIFs -->
+    <img src="bubu-dudu-sseeyall (1).gif" alt="gif 1" class="gif-positioned gif-top-left" />
+    <img src="bubu-dudu-sseeyall.gif" alt="gif 2" class="gif-positioned gif-top-right" />
+    <img src="bubu-jumping-on-dudu-happy.gif" alt="gif 3" class="gif-positioned gif-middle-left" />
+    <img src="cute.gif" alt="gif 4" class="gif-positioned gif-middle-right" />
+    <br />
+    
+    <!-- Background music - Lukas Graham & Sam Smith -->
+    <audio id="bgMusic" autoplay loop>
+      <source src="lukas-graham-sam-smith-7-years-x-latch-lyrics-tiktok-version-mp3-34734_QavEte5z.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Music control button -->
+    <div class="music-controls">
+      <button id="muteBtn" class="control-btn">🔇 Mute</button>
+    </div>
+
+    <script>
+      // Music controls
+      const audio = document.getElementById('bgMusic');
+      const muteBtn = document.getElementById('muteBtn');
+      
+      // Initialize mute state from localStorage
+      const savedMuteState = localStorage.getItem('musicMuted');
+      let isMuted = savedMuteState === 'true';
+      
+      // Initialize playback time from localStorage
+      const savedTime = localStorage.getItem('musicTime');
+      if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
+      }
+      
+      // Apply initial state
+      audio.muted = isMuted;
+      muteBtn.innerHTML = isMuted ? '🔊 Unmute' : '🔇 Mute';
+      
+      // Mute/Unmute toggle
+      muteBtn.addEventListener('click', function() {
+        isMuted = !isMuted;
+        audio.muted = isMuted;
+        muteBtn.innerHTML = isMuted ? '🔊 Unmute' : '🔇 Mute';
+        localStorage.setItem('musicMuted', isMuted);
+      });
+      
+      // Save playback time periodically and on unload
+      setInterval(() => {
+        localStorage.setItem('musicTime', audio.currentTime);
+      }, 1000);
+      
+      window.addEventListener('beforeunload', () => {
+        localStorage.setItem('musicTime', audio.currentTime);
+      });
+    
+      // Create floating hearts animation
+      function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        
+        // Random horizontal position
+        heart.style.left = Math.random() * 100 + '%';
+        
+        // Random animation duration (slower = more romantic)
+        const duration = Math.random() * 3 + 4; // 4-7 seconds
+        heart.style.animationDuration = duration + 's';
+        
+        // Random size
+        const size = Math.random() * 20 + 20; // 20-40px
+        heart.style.fontSize = size + 'px';
+        
+        // Random delay
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        
+        document.getElementById('heartsContainer').appendChild(heart);
+        
+        // Remove heart after animation completes
+        setTimeout(() => {
+          heart.remove();
+        }, (duration + 2) * 1000);
+      }
+
+      // Create hearts continuously
+      setInterval(createHeart, 300); // New heart every 300ms
+      
+      // Create initial batch of hearts
+      for (let i = 0; i < 15; i++) {
+        setTimeout(createHeart, i * 200);
+      }
+    </script>
+  </body>
+</html>

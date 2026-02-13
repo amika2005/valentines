@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Everything</title>
+    <link rel="stylesheet" href="css/date.css" />
+  </head>
+  <body>
+    <img src="logo.jpg" alt="Logo" class="page-logo" />
+    <!-- Floating hearts background -->
+    <div class="hearts-background"></div>
+    
+    <!-- Sparkles animation -->
+    <div class="sparkles-container" id="sparklesContainer"></div>
+    
+    <div class="container">
+      <!-- Two column layout -->
+      <div class="content-wrapper">
+        <!-- Left side: Photo and titles -->
+        <div class="left-column">
+          <!-- Photo frame with animations -->
+          <div class="photo-frame">
+            <div class="photo-glow"></div>
+            <img src="2022.jpeg" alt="My Everything" class="girlfriend-photo" />
+            <div class="photo-year">2022</div>
+            <div class="photo-overlay"></div>
+          </div>
+          
+          <!-- Love titles -->
+          <div class="love-titles">
+            <h2 class="title-line">My Beautiful Girlfriend 💕</h2>
+            <h2 class="title-line">My Princess 👑</h2>
+            <h2 class="title-line">My Everything ✨</h2>
+          </div>
+        </div>
+        
+        <!-- Right side: Love letter -->
+        <div class="right-column">
+          <div class="love-letter">
+            <div class="letter-content">
+              <p class="letter-opening">To My Dearest Love,</p>
+              
+              <p class="letter-text">
+                Every moment with you feels like a beautiful dream that I never want to end. 
+                You are the sunshine that brightens my darkest days, the melody that makes my heart sing, 
+                and the reason behind my every smile.
+              </p>
+              
+              <p class="letter-text">
+                You are not just my girlfriend – you are my best friend, my confidant, my princess, 
+                and truly my everything. Your love has transformed my world into something magical, 
+                and I am forever grateful for every second I get to spend with you.
+              </p>
+              
+              <p class="letter-text">
+                With you, I've found a love that I didn't even know existed. You make me want to be 
+                a better person every single day. Your smile lights up my world, your laughter is my 
+                favorite sound, and your happiness is my greatest treasure.
+              </p>
+              
+              <p class="letter-closing">
+                Forever yours,<br />
+                <span class="signature">Your kotaaaas ❤️</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation button -->
+      <div class="button-container">
+        <button class="next-button" onclick="location.href='lastpage.html'">
+          Continue ✨
+        </button>
+      </div>
+    </div>
+
+    <!-- Background music -->
+    <audio id="bgMusic" autoplay loop>
+      <source src="lukas-graham-sam-smith-7-years-x-latch-lyrics-tiktok-version-mp3-34734_QavEte5z.mp3" type="audio/mpeg" />
+    </audio>
+    
+    <!-- Music control button -->
+    <div class="music-controls">
+      <button id="muteBtn" class="control-btn">🔇 Mute</button>
+    </div>
+
+    <script>
+      // Music controls
+      const audio = document.getElementById('bgMusic');
+      const muteBtn = document.getElementById('muteBtn');
+      
+      // Initialize mute state from localStorage
+      const savedMuteState = localStorage.getItem('musicMuted');
+      let isMuted = savedMuteState === 'true';
+      
+      // Initialize playback time from localStorage
+      const savedTime = localStorage.getItem('musicTime');
+      if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
+      }
+      
+      // Apply initial state
+      audio.muted = isMuted;
+      muteBtn.innerHTML = isMuted ? '🔊 Unmute' : '🔇 Mute';
+      
+      // Mute/Unmute toggle
+      muteBtn.addEventListener('click', function() {
+        isMuted = !isMuted;
+        audio.muted = isMuted;
+        muteBtn.innerHTML = isMuted ? '🔊 Unmute' : '🔇 Mute';
+        localStorage.setItem('musicMuted', isMuted);
+      });
+
+      // Save playback time periodically and on unload
+      setInterval(() => {
+        localStorage.setItem('musicTime', audio.currentTime);
+      }, 1000);
+      
+      window.addEventListener('beforeunload', () => {
+        localStorage.setItem('musicTime', audio.currentTime);
+      });
+
+      // Create floating hearts
+      function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        
+        document.querySelector('.hearts-background').appendChild(heart);
+        
+        setTimeout(() => heart.remove(), 7000);
+      }
+      
+      // Create sparkles
+      function createSparkle() {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.innerHTML = '✨';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDuration = (Math.random() * 1 + 1) + 's';
+        
+        document.getElementById('sparklesContainer').appendChild(sparkle);
+        
+        setTimeout(() => sparkle.remove(), 2000);
+      }
+      
+      // Generate hearts and sparkles
+      setInterval(createHeart, 400);
+      setInterval(createSparkle, 300);
+      
+      // Initial batch
+      for (let i = 0; i < 10; i++) {
+        setTimeout(createHeart, i * 200);
+        setTimeout(createSparkle, i * 150);
+      }
+
+      // Typewriter Effect for Love Letter
+      const letterContent = document.querySelector('.letter-content');
+      const paragraphs = Array.from(letterContent.querySelectorAll('p'));
+      
+      // Store original text and clear content
+      const originalTexts = paragraphs.map(p => p.innerHTML);
+      paragraphs.forEach(p => p.innerHTML = '');
+      
+      // Typing function
+      async function typeWriter(element, text, speed = 30) {
+        // Handle HTML tags (like <br> or <span>) by temporarily creating a hidden element
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = text;
+        const nodes = Array.from(tempDiv.childNodes);
+        
+        for (const node of nodes) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const chars = node.textContent.split('');
+            for (const char of chars) {
+              element.append(char);
+              // Scroll to bottom as we type
+              element.scrollIntoView({ behavior: "smooth", block: "end" }); 
+              await new Promise(resolve => setTimeout(resolve, speed));
+            }
+          } else {
+            // Append HTML elements (like <br> or <span>) directly
+            // Make a clone to append
+             const clone = node.cloneNode(true);
+             element.appendChild(clone);
+             
+             // If the node has text content inside (like span), we might want to animate that too?
+             // For simplicity, let's just append complex nodes fully (like the signature)
+             // or recursively TypeWrite if needed. For now, appending is safer for layout.
+             await new Promise(resolve => setTimeout(resolve, speed * 5));
+          }
+        }
+      }
+
+      // Main typing loop
+      async function startTyping() {
+        // Wait for letter animation to finish (approx 2s)
+        await new Promise(resolve => setTimeout(resolve, 2500));
+        
+        for (let i = 0; i < paragraphs.length; i++) {
+          await typeWriter(paragraphs[i], originalTexts[i]);
+          // Pause between paragraphs
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+      }
+      
+      // Slideshow Logic
+      const images = ['2022.jpeg', '2023.jpeg', '2024.jpeg', '2025.jpeg', '2026.jpeg'];
+      const years = ['2022', '2023', '2024', '2025', '2026'];
+      let currentImageIndex = 0;
+      const photoElement = document.querySelector('.girlfriend-photo');
+      const yearElement = document.querySelector('.photo-year');
+      
+      // Set initial image and year
+      photoElement.src = images[0];
+      yearElement.textContent = years[0];
+      
+      function changeImage() {
+        // Add fade out class
+        photoElement.classList.add('fade-out');
+        yearElement.classList.add('fade-out');
+        
+        setTimeout(() => {
+          // Update image source and year after fade out
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+          photoElement.src = images[currentImageIndex];
+          yearElement.textContent = years[currentImageIndex];
+          
+          // Remove fade out class to fade in
+          photoElement.classList.remove('fade-out');
+          yearElement.classList.remove('fade-out');
+        }, 500); // Wait for 0.5s fade out
+      }
+      
+      // Change image every 3 seconds
+      setInterval(changeImage, 3000);
+
+      startTyping();
+    </script>
+  </body>
+</html>

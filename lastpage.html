@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/watercolor.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <a href="index.html"><img src="logo.jpg" alt="Logo" class="page-logo" /></a>
+    
+    <!-- Couple photo -->
+    <div class="couple-photo-container">
+      <img src="couple.jpeg" alt="Us Together" class="couple-photo" />
+      <div id="thankyou">Thank you for being my girlfriend</div>
+    </div>
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworksCanvas"></canvas>
+    
+    <!-- Fireworks Script -->
+    <script src="js/fireworks.js"></script>
+
+    <!-- Background music -->
+    <audio id="bgMusic" autoplay loop>
+      <source src="lukas-graham-sam-smith-7-years-x-latch-lyrics-tiktok-version-mp3-34734_QavEte5z.mp3" type="audio/mpeg" />
+    </audio>
+    
+    <!-- Music control button -->
+    <div class="music-controls">
+      <button id="muteBtn" class="control-btn">🔇 Mute</button>
+    </div>
+
+    <script>
+      // Music controls
+      const audio = document.getElementById('bgMusic');
+      const muteBtn = document.getElementById('muteBtn');
+      
+      // Initialize mute state from localStorage
+      const savedMuteState = localStorage.getItem('musicMuted');
+      let isMuted = savedMuteState === 'true';
+      
+      // Initialize playback time from localStorage
+      const savedTime = localStorage.getItem('musicTime');
+      if (savedTime && audio) {
+        audio.currentTime = parseFloat(savedTime);
+      }
+      
+      // Apply initial state
+      if (audio) {
+        audio.muted = isMuted;
+        muteBtn.innerHTML = isMuted ? '🔊 Unmute' : '🔇 Mute';
+      }
+      
+      // Mute/Unmute toggle
+        muteBtn.addEventListener('click', function() {
+          isMuted = !isMuted;
+          if (audio) audio.muted = isMuted;
+          muteBtn.innerHTML = isMuted ? '🔊 Unmute' : '🔇 Mute';
+          localStorage.setItem('musicMuted', isMuted);
+        });
+
+      // Save playback time periodically and on unload
+      if (audio) {
+        setInterval(() => {
+          localStorage.setItem('musicTime', audio.currentTime);
+        }, 1000);
+        
+        window.addEventListener('beforeunload', () => {
+          localStorage.setItem('musicTime', audio.currentTime);
+        });
+      }
+    </script>
+  </body>
+</html>
